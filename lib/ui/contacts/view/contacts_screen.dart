@@ -42,7 +42,6 @@ class _ContactsScreenState extends State<ContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 30, vertical: 57),
@@ -86,42 +85,44 @@ class _ContactsScreenState extends State<ContactsScreen> {
                             result=list;
                           }
                           return result!.isNotEmpty
-                              ? ListView.builder(
-                                  itemCount: result?.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return Container(
-                                      decoration:
-                                          BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.white),
-                                      margin: const EdgeInsets.symmetric(vertical: 10),
-                                      child: ListTile(
-                                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                                        tileColor: Colors.transparent,
-                                        onTap: () {
-                                          Navigator.pushNamed(context, '/contact_edit');
-                                          context.read<GetContactCubit>().getContact(id: result![index]!.id.toString());
-                                        },
-                                        leading:SizedBox(
-                                          width: 48,
-                                          height: 48,
-                                          child: CircleAvatar(
-                                            radius: 30.0,
-                                            backgroundImage:
-                                            NetworkImage('${result?[index]?.profileImageUrl}'),
-                                            backgroundColor: Colors.transparent,
+                              ? Expanded(
+                                child: ListView.builder(
+                                    itemCount: result?.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return Container(
+                                        decoration:
+                                            BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.white),
+                                        margin: const EdgeInsets.symmetric(vertical: 10),
+                                        child: ListTile(
+                                          contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                                          tileColor: Colors.transparent,
+                                          onTap: () {
+                                            Navigator.pushNamed(context, '/contact_edit');
+                                            context.read<GetContactCubit>().getContact(id: result![index]!.id.toString());
+                                          },
+                                          leading:SizedBox(
+                                            width: 48,
+                                            height: 48,
+                                            child: CircleAvatar(
+                                              radius: 30.0,
+                                              backgroundImage:
+                                              NetworkImage('${result?[index]?.profileImageUrl}'),
+                                              backgroundColor: Colors.transparent,
+                                            ),
+                                          ),
+                                          title: Text(
+                                            '${result?[index]?.firstName} ${result?[index]?.lastName}',
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                          ),
+                                          subtitle: Text(
+                                            '${result?[index]?.phoneNumber}',
                                           ),
                                         ),
-                                        title: Text(
-                                          '${result?[index]?.firstName} ${result?[index]?.lastName}',
-                                          style: TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                        subtitle: Text(
-                                          '${result?[index]?.phoneNumber}',
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
+                                      );
+                                    },
+                                  ),
+                              )
                               : list!.isEmpty?Expanded(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,

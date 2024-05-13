@@ -55,7 +55,10 @@ class _ContactAddScreenState extends State<ContactAddScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    Icon(Icons.error,color: Colors.red,),
+                    Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
                     CustomSizedBox(
                       width: 24,
                     ),
@@ -96,7 +99,10 @@ class _ContactAddScreenState extends State<ContactAddScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    Icon(Icons.error,color: Colors.red,),
+                    Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
                     CustomSizedBox(
                       width: 24,
                     ),
@@ -116,8 +122,10 @@ class _ContactAddScreenState extends State<ContactAddScreen> {
   }
 
   doneButtonControl() {
-    if (firstNameController?.text != "" && lastNameController?.text != "" && phoneNumberController?.text != "" &&
-        image!=null) {
+    if (firstNameController?.text != "" &&
+        lastNameController?.text != "" &&
+        phoneNumberController?.text != "" &&
+        image != null) {
       return true;
     } else {
       return false;
